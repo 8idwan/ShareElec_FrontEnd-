@@ -1,59 +1,58 @@
 .top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: var(--background-light);
-    border-bottom: 1px solid var(--border-light);
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 1.2rem;
-  }
-  
-  .account-options {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .auth-buttons {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-  .btn-login {
-    margin-right: 100px;
-    background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-decoration: none;
-  }
-  
-  .btn-login:hover {
-    background: rgba(33, 150, 243, 0.1);
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--background-light);
+  border-bottom: 1px solid var(--border-light);
+}
 
-  
-  @media (max-width: 768px) {
-    .auth-buttons {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
- 
-    .btn-register {
-      width: 100%;
-      text-align: center;
-    }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.account-options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-login {
+  background: transparent;
+  border: 1px solid #2196f3;
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-login:hover {
+  background: rgba(33, 150, 243, 0.1);
+}
+
+
+
+@media (max-width: 768px) {
+  .auth-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
   }
+
+  .btn-register {
+    width: 100%;
+    text-align: center;
+  }
+}
