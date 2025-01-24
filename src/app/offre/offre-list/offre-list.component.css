@@ -5,6 +5,55 @@ body {
   background-color: #f5f5f5;
 }
 
+.user-type-professional {
+  margin-left: 5px;
+  border: 2px solid rgb(144, 238, 144); /* Bordure avec la couleur souhaitée */
+  background-color: rgb(144, 238, 144); /* Couleur de fond vert clair */
+  font-weight: normal; /* Texte non gras */
+  border-radius: 10px; /* Coins arrondis */
+  padding: 2px; /* Ajoute un espace interne pour un meilleur rendu */
+}
+
+.offer-card .offer-actions{
+  margin-left: 50px;
+  
+}
+
+.offer-card .offer-actions .btn-btn-secondary{
+  height: 30px;
+  width: 100px;
+  border-radius: 10px;
+  border: 3px solid  rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
+  margin-left: 30px;
+}
+
+.offer-card .offer-actions .btn-btn-primary{
+  height: 30px;
+
+  width: 100px;
+  border-radius: 10px;
+  border: 3px solid  rgba(0, 0, 0, 0.05);
+  background-color: #2196f3;
+  margin-left: 30px;
+  color: white;
+}
+
+.offer-timestamp{
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+.offer-details .qt{
+  margin-top: 10px;
+}
+
+.offer-details .val {
+  font-weight: bold !important; 
+  font-size: 16px;
+}
+
+
+
 .app-container {
   display: flex;
 }
@@ -108,8 +157,14 @@ body {
 }
 
 .market-overview {
-  margin-top: 10px;
+  margin-top: 5px;
   margin-left: 60px;
+
+}
+
+.market-overview .of{
+  margin-top: 30px;
+
 
 }
 
@@ -117,7 +172,7 @@ body {
     margin-left: 1100px;
 
   padding: 10px 20px;
-  background-color: green;
+  background-color: rgb(72, 220, 74);
   color: white;
   border: none;
   border-radius: 5px;
@@ -157,9 +212,7 @@ body {
   font-weight: bold;
 }
 
-.offer-card .offer-actions button {
-  margin-right: 10px;
-}
+
 
 .pagination {
   display: flex;

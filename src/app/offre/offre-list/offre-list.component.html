@@ -82,7 +82,7 @@
       </div>
 
       <div class="market-overview">
-        <h1>Offres Disponibles</h1>
+        <h1 class="of">Offres Disponibles</h1>
         <div class="market-actions">
           <button (click)="opendiag()">Publier une Offre</button>
         </div>
@@ -91,26 +91,26 @@
       <div class="offers-grid">
         <div class="offer-card" *ngFor="let offer of paginatedOffers">
           <div class="user-info">
-            <img src="././assets/user.png" alt="Photo de profil" />
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzJweCIgd2lkdGg9IjMycHgiIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTIyNCAyNTZBMTI4IDEyOCAwIDEgMCAyMjQgMGExMjggMTI4IDAgMSAwIDAgMjU2em0tNDUuNyA0OEM3OS44IDMwNCAwIDM4My44IDAgNDgyLjNDMCA0OTguNyAxMy4zIDUxMiAyOS43IDUxMmwzODguNiAwYzE2LjQgMCAyOS43LTEzLjMgMjkuNy0yOS43QzQ0OCAzODMuOCAzNjguMiAzMDQgMjY5LjcgMzA0bC05MS40IDB6Ii8+PC9zdmc+" alt="User Icon" width="28" height="28">
 
-              alt="Photo de profil">
             <div>
               <div class="name-badge">
                 {{offer.userName}}
-                <span class="user-type professional">{{offer.userStatus}}</span>
+                <span class="user-type-professional">{{offer.userStatus}}</span>
               </div>
             </div>
           </div>
           <span class="offer-timestamp">{{offer.date}}</span>
           <div class="offer-details">
-            <p>Quantité disponible: {{offer.quantite}} kWh</p>
-            <p>Prix unitaire: {{offer.prixKw}} €/kWh</p>
-            <p>Type d'énergie : {{offer.type}}</p>
-            <p>Status: {{offer.status}}</p>
+            <p class="qt">Quantité disponible: <span class="val">{{offer.quantite}} kWh </span> </p>
+            <p>Vend par detail: <span class="val">{{offer.vendDetails}}</span></p>
+            <p>Prix unitaire: <span class="val">{{offer.prixKw}} €/kWh</span></p>
+            <p>Type d'énergie: <span class="val">{{offer.type}}</span></p>
+            <p>Status: <span class="val">{{offer.status}}</span></p>
           </div>
           <div class="offer-actions">
-            <button class="btn btn-primary">Acheter</button>
-            <button class="btn btn-secondary">Contacter</button>
+            <button class="btn-btn-primary">Acheter</button>
+            <button class="btn-btn-secondary">Contacter</button>
           </div>
         </div>
       </div>
