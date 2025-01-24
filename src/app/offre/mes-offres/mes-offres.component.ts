@@ -143,11 +143,10 @@ export class MesOffresComponent {
       }
     }
   
-    calculePrixMoyen(): number {
-      if (this.offers.length === 0) return 0;
-  
-      const totalPrice = this.offers.reduce((sum, offer) => sum + offer.prixKw, 0);
-      return Number((totalPrice / this.offers.length).toFixed(3));
+    quantiteTotalVendu(): number {
+      return this.offers
+        .filter(offer => offer.status === 'Vendu')
+        .reduce((sum, offer) => sum + offer.quantite, 0);
     }
   
     offreActives(): number {

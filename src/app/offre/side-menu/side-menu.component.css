@@ -4,9 +4,10 @@
 
   color: white;
   width: 220px;
-  height: 512px;
+  height: 800px;
   position: fixed;
   padding: 20px;
+  
 }
 
 .sidebar nav a {
@@ -20,11 +21,16 @@
   transition: background-color 0.3s;
 }
 
-.sidebar nav a svg {
-  margin-right: 10px; /* Espace entre l'icône et le texte */
+.sidebar nav a.active {
+  background-color: #007bff;
+  color: white;
 }
 
-.sidebar nav a.active,
+.sidebar nav a svg {
+  margin-right: 10px;
+}
+
+
 .sidebar nav a:hover {
   background-color: #007bff;
 }

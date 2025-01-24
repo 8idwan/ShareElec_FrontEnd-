@@ -20,24 +20,38 @@ body {
   
 }
 
-.offer-card .offer-actions .btn-btn-secondary{
-  height: 30px;
-  width: 100px;
-  border-radius: 10px;
-  border: 3px solid  rgba(0, 0, 0, 0.05);
-  background-color: rgba(0, 0, 0, 0.05);
+.offer-card .offer-actions .btn-btn-secondary {
   margin-left: 30px;
+  background: transparent;
+  border: 1px solid #2196f3;
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
 }
 
-.offer-card .offer-actions .btn-btn-primary{
-  height: 30px;
+.offer-card .offer-actions .btn-btn-secondary:hover {
+  background: rgba(33, 150, 243, 0.1);
+}
 
-  width: 100px;
-  border-radius: 10px;
-  border: 3px solid  rgba(0, 0, 0, 0.05);
+.offer-card .offer-actions .btn-btn-primary {
+  background: transparent;
+  border: 1px solid #2196f3;
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
   background-color: #2196f3;
   margin-left: 30px;
   color: white;
+}
+
+.offer-card .offer-actions .btn-btn-primary:hover {
+  background: #1769b1;
 }
 
 .offer-timestamp{
