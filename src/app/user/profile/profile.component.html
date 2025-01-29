@@ -8,9 +8,13 @@
 <body>
     <!-- <app-header></app-header> -->
     <div class="flex flex-col items-center p-8 bg-gray-100 min-h-screen">
+
+        <div class="flex m-3 gap-10 w-full max-w-7xl">
+            <p>Section 1</p>
+        </div>
     
         <!-- Section 1: Account Balance, Transactions, Alerts -->
-        <div class="flex gap-10 w-full max-w-7xl">
+        <div class="flex m-3 gap-10 w-full max-w-7xl">
             
             <!-- Account Balance Section -->
             <div class="p-8 h-80 w-1/3 border border-gray-300 bg-white shadow-md rounded-md">
@@ -36,19 +40,19 @@
                         <tbody>
                             <tr class="text-gray-600">
                                 <td class="border border-gray-300 px-4 py-2">Achat</td>
-                                <td class="border border-gray-300 px-4 py-2">100Kw</td>
+                                <td class="border border-gray-300 px-4 py-2">100kWh</td>
                                 <td class="border border-gray-300 px-4 py-2">0.12€</td>
                                 <td class="border border-gray-300 px-4 py-2">120€</td>
                             </tr>
                             <tr class="text-gray-600">
                                 <td class="border border-gray-300 px-4 py-2">Vente</td>
-                                <td class="border border-gray-300 px-4 py-2">50Kw</td>
+                                <td class="border border-gray-300 px-4 py-2">50kWh</td>
                                 <td class="border border-gray-300 px-4 py-2">0.15€</td>
                                 <td class="border border-gray-300 px-4 py-2">60€</td>
                             </tr>
                             <tr class="text-gray-600">
                                 <td class="border border-gray-300 px-4 py-2">Achat</td>
-                                <td class="border border-gray-300 px-4 py-2">20Kw</td>
+                                <td class="border border-gray-300 px-4 py-2">20kWh</td>
                                 <td class="border border-gray-300 px-4 py-2">0.10€</td>
                                 <td class="border border-gray-300 px-4 py-2">20€</td>
                             </tr>
@@ -65,10 +69,29 @@
         </div>
     
         <!-- Section 2: Below Section 1 -->
-        <div class="flex w-full max-w-7xl justify-between mt-10 p-6 bg-white shadow-md border border-gray-300 rounded-md">
-            <div class="p-4 g-40 font-semibold text-gray-700">Section 1</div>
-            <div class="p-4 g-40 font-semibold text-gray-700">Section 2</div>
+        <div class="flex m-3 gap-10 w-full max-w-7xl">
+            <div class="p-8 h-80 w-1/3 border border-gray-300 bg-white shadow-md rounded-md">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">A Propos</h2>
+            </div>
+            <div class="p-8 h-80 w-2/3 border border-gray-300 bg-white shadow-md rounded-md">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Alertes du Marché</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex justify-center bg-blue-100  p-4 rounded-md shadow">
+                        <p class="text-4xl font-bold text-blue-500">1245 kWh</p>
+                    </div>
+                    <div class="flex justify-center bg-blue-100 p-4 rounded-md shadow ">
+                        <p class="text-4xl font-bold text-blue-500">900 kWh</p>
+                    </div>
+                    <div class="flex justify-center bg-blue-100 p-4 rounded-md shadow">
+                        <p class="text-4xl font-bold text-blue-500">0.12</p>
+                    </div>
+                    <div class="flex justify-center align-center bg-blue-100 p-4 rounded-md shadow">
+                        <p class="text-4xl font-bold text-blue-500">95%</p>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     
     </div>
     
