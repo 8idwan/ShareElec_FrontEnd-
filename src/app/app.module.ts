@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule, DatePipe } from '@angular/common';
 import { OffreListComponent } from './offre/offre-list/offre-list.component';
-
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="flex justify-center items-center h-screen bg-gray-100">
+        <div class="flex flex-col gap-4 p-8 bg-white shadow-lg rounded-md w-80">
+          <h2 class="text-2xl font-bold text-center text-gray-700">Connexion</h2>
+      
+          <form action="#" method="POST" class="flex flex-col gap-4">
+            <input 
+              type="email" name="mail" id="mail" placeholder="Email"
+              required
+              class="p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+            >
+      
+            <input 
+              type="password" name="password" id="password" placeholder="Password"
+              required
+              class="p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+            >
+      
+            <button 
+              type="submit"
+              class="bg-blue-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-blue-600 transition"
+            >
+              Connecter
+            </button>
+          </form>
+      
+          <a href="#" class="text-blue-500 text-center hover:underline">Mot de passe oublié?</a>
+      
+          <div class="flex items-center my-4">
+            <hr class="flex-grow border-gray-300">
+            <span class="mx-3 text-gray-500">Ou</span>
+            <hr class="flex-grow border-gray-300">
+          </div>
+      
+          <button 
+            type="button"
+            class="flex items-center justify-center bg-red-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-red-600 transition"
+            onclick="loginWithGoogle()"
+          >
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 mr-2" alt="Google">
+            Connecter avec Google
+          </button>
+      
+        </div>
+      </div>
+<script>
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();  // Prevent default form submission
+    const email = document.getElementById('mail').value;
+    const password = document.getElementById('password').value;
+
+    console.log("Email:", email);
+    console.log("Password:", password);
+
+    // Here you can add your logic to send the data to the backend via fetch or XMLHttpRequest.
+});
+
+function loginWithGoogle() {
+    alert('Google Login Clicked');
+}
+</script>      
+</body>
+</html>

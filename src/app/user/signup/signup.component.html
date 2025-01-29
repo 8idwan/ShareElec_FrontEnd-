@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="flex justify-center items-center h-screen bg-gray-100">
+        <div class="flex flex-col gap-4 p-8 bg-white shadow-lg rounded-md w-80">
+            <h2 class="text-2xl font-bold text-center text-gray-700">Inscription</h2>
+    
+            <form action="#" method="POST" class="flex flex-col gap-4">
+                <input type="text" name="first_name" id="first_name" placeholder="First name" required
+                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+    
+                <input type="text" name="last_name" id="last_name" placeholder="Last name" required
+                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 ">
+    
+                <input type="email" name="mail" id="mail" placeholder="Email" required
+                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+    
+                <input type="password" name="password" id="password" placeholder="Password" required
+                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+    
+                <input type="password" name="confirm_password" id="conf_password" placeholder="Confirm password" required
+                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+    
+                <button type="submit"
+                    class="bg-blue-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-blue-600 transition">
+                    Sign Up
+                </button>
+            </form>
+    
+            <div class="flex items-center my-4">
+                <hr class="flex-grow border-gray-300">
+                <span class="mx-3 text-gray-500">Ou</span>
+                <hr class="flex-grow border-gray-300">
+            </div>
+    
+            <button type="button"
+                class="flex items-center justify-center bg-red-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-red-600 transition">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 mr-2" alt="Google">
+                Inscription avec Google
+            </button>
+        </div>
+    </div>
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('conf_password').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            event.preventDefault();
+        }
+    });
+</script>
+        
+</body>
+</html>
