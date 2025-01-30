@@ -73,11 +73,11 @@
             <p>Vend par detail: <span class="val">{{offer.vendDetails == true ? 'Oui' : 'Non'}}</span></p>
             <p>Prix unitaire: <span class="val">{{offer.prixKw}} €/kWh</span></p>
             <p>Type d'énergie: <span class="val">{{offer.type}}</span></p>
-            <p>Status: <span class="val">
-              {{ offer.status === true ? 'Disponible' : 'Vendu' }}
-          </span></p>          </div>
+            <p>Status: <span class="val">{{ offer.status === true ? 'Disponible' : 'Vendu' }} </span></p>
+            
+          </div>
           <div class="offer-actions">
-            <button class="btn-btn-primary">Modifier</button>
+            <button class="btn-btn-primary" (click)="openEditDialog(offer)">Modifier</button>
             <button class="btn-btn-secondary" (click)="deleteOffre(offer.id)">Supprimer</button>
         </div>
         </div>
