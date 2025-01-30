@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Offre } from '../model/offre.model';
 import { MesOffres } from '../model/mes-offres.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +40,7 @@ export class OffreService {
     return this.http.get<Offre>(`${this.baseUrl}/api/Offre/offres/${id}`)
   }
 
-  deleteOffre = (id : number) : Observable<Object> =>{
+ deleteOffre = (id : number) : Observable<Object> =>{
     return this.http.delete(`${this.baseUrl}/api/Offre/delete/${id}`)
   }
 
@@ -49,5 +50,6 @@ export class OffreService {
     };
     return this.http.put<Offre>(`${this.baseUrl}/api/Offre/update/${id}`, offre, options);
   }
+
 
 }

@@ -9,4 +9,5 @@ export class MesOffres {
         public vendDetails: boolean,
         public status: boolean
     ) { }
+
 }

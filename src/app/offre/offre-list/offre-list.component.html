@@ -70,9 +70,7 @@
           <span class="offer-timestamp">{{offer.date}}</span>
           <div class="offer-details">
             <p class="qt">Quantité disponible: <span class="val">{{offer.quantite}} kWh </span> </p>
-            <p>Vend par detail: <span class="val">
-              {{ offer.vendDetails === true ? 'Oui' : 'Non' }}
-          </span></p>
+            <p>Vend par detail: <span class="val">{{offer.vendDetails == true ? 'Oui' : 'Non'}}</span></p>
             <p>Prix unitaire: <span class="val">{{offer.prixKw}} €/kWh</span></p>
             <p>Type d'énergie: <span class="val">{{offer.type}}</span></p>
             <p>Status: <span class="val">
