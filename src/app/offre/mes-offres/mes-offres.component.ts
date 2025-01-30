@@ -17,13 +17,11 @@ import { EditOffreComponent } from '../edit-offre/edit-offre.component';
   styleUrl: './mes-offres.component.css'
 })
 export class MesOffresComponent {
-
   offers: MesOffres[] = [];
   
     offersPerPage = 6;
     currentPage = 1;
-    
-constructor(private dialog:MatDialog,private offreservice:OffreService) { }
+    constructor(private dialog:MatDialog,private offreservice:OffreService) { }
 
     ngOnInit(): void {
       this.MesOffre();
@@ -33,7 +31,7 @@ constructor(private dialog:MatDialog,private offreservice:OffreService) { }
     MesOffre(): void {
       console.log("mes")
       this.offreservice.getOffersByUserId(2).subscribe(
-        (data: Offre[]) => {
+        (data: MesOffres[]) => {
           console.log('Mes Offre');
           console.log(data);
           this.offers = data; 
@@ -49,7 +47,36 @@ constructor(private dialog:MatDialog,private offreservice:OffreService) { }
       console.log("ll")
       this.dialog.open(AddOffreComponent);
       
+
+    }
+
+    openEditDialog(offer: MesOffres): void {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.data = {
+        id: offer.id,
+        userId: offer.userId,
+        quantite: offer.quantite,
+        vendDetails: offer.vendDetails,
+        type: offer.type,
+        prixKw: offer.prixKw,
+        status: offer.status,
+        date: offer.date
+      };;
+      const dialogRef = this.dialog.open(EditOffreComponent, dialogConfig);
   
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.offreservice.modifierOffer(offer.id, result).subscribe(
+            (updatedOffer) => {
+              console.log('Offre modifiée avec succès:', updatedOffer);
+              this.MesOffre();
+            },
+            (error) => {
+              console.error('Erreur lors de la modification:', error);
+            }
+          );
+        }
+      });
     }
 
     deleteOffre(id:any): void {
@@ -77,42 +104,9 @@ constructor(private dialog:MatDialog,private offreservice:OffreService) { }
         (direction === 1 && this.currentPage < this.totalPages)
       ) {
         this.currentPage += direction;
-
       }
-    );
-  }
-
-
-  openEditDialog(offer: MesOffres): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      id: offer.id,
-      userId: offer.userId,
-      quantite: offer.quantite,
-      vendDetails: offer.vendDetails,
-      type: offer.type,
-      prixKw: offer.prixKw,
-      status: offer.status,
-      date: offer.date
-    };;
-    const dialogRef = this.dialog.open(EditOffreComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.offreservice.modifierOffer(offer.id, result).subscribe(
-          (updatedOffer) => {
-            console.log('Offre modifiée avec succès:', updatedOffer);
-            this.MesOffre();
-          },
-          (error) => {
-            console.error('Erreur lors de la modification:', error);
-          }
-        );
-      }
-    });
-  }
-
- 
+    }
+  
     quantiteTotalVendu(): number {
       return this.offers
         .filter(offer => offer.status === true)
@@ -134,6 +128,5 @@ constructor(private dialog:MatDialog,private offreservice:OffreService) { }
         .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
     }
   
-
 
 }
