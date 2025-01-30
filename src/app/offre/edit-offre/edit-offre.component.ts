@@ -11,14 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EditOffreComponent implements OnInit {
 closeDialog() {
-  const formData = {
-    ...this.editform.value,
-    id: this.offerId,
-    userId: this.data.userId, 
-    status: this.data?.status || 'Disponible',
-    date: this.data?.date || new Date().toISOString()
-  };
-  this.dialogRef.close(formData);
+  this.dialogRef.close();
 }
   editform: FormGroup;
   isEditMode: boolean = false;

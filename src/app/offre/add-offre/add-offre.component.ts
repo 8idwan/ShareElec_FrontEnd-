@@ -70,4 +70,9 @@ export class AddOffreComponent {
       console.log('Le formulaire contient des erreurs.');
     }
   }
+
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }

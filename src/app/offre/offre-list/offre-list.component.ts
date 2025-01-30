@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-offre-list',
   standalone: true,
-  imports: [CommonModule,MatDialogModule,HttpClientModule],
+  imports: [CommonModule, MatDialogModule, HttpClientModule],
   providers: [OffreService],
   templateUrl: './offre-list.component.html',
   styleUrl: './offre-list.component.css'
@@ -19,73 +19,81 @@ export class OffreListComponent {
 
   offersPerPage = 6;
   currentPage = 1;
-  constructor(private dialog:MatDialog,private offreservice:OffreService) { }
-  
+  constructor(private dialog: MatDialog, private offreservice: OffreService) { }
+
   ngOnInit(): void {
     this.getOffers();
-    this.offers.reverse();
+    
   }
-  
+
   getOffers(): void {
     this.offreservice.getOffers().subscribe(
       (data: Offre[]) => {
         console.log('response');
         console.log(data);
-        this.offers = data; 
-         
+        this.offers = data;
+
       },
       (error) => {
         console.error('Error fetching offers:', error);
       }
     );
+    this.offers.reverse();
   }
-  
+
   opendiag(): void {
-    console.log("ll")
-    this.dialog.open(AddOffreComponent);
+    const dialogRef = this.dialog.open(AddOffreComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("closed");
+      this.getOffers()
+    });
 
   }
+
+
+
+  
 
 
   get paginatedOffers(): Offre[] {
-    const startIndex = (this.currentPage - 1) * this.offersPerPage;
-    const endIndex = startIndex + this.offersPerPage;
-    return this.offers.slice(startIndex, endIndex);
-  }
+  const startIndex = (this.currentPage - 1) * this.offersPerPage;
+  const endIndex = startIndex + this.offersPerPage;
+  return this.offers.slice(startIndex, endIndex);
+}
 
   get totalPages(): number {
-    return Math.ceil(this.offers.length / this.offersPerPage);
-  }
+  return Math.ceil(this.offers.length / this.offersPerPage);
+}
 
-  changePage(direction: number): void {
-    if (
+changePage(direction: number): void {
+  if(
       (direction === -1 && this.currentPage > 1) ||
-      (direction === 1 && this.currentPage < this.totalPages)
+  (direction === 1 && this.currentPage < this.totalPages)
     ) {
-      this.currentPage += direction;
-    }
+  this.currentPage += direction;
+}
   }
 
-  calculePrixMoyen(): number {
-    if (this.offers.length === 0) return 0;
+calculePrixMoyen(): number {
+  if (this.offers.length === 0) return 0;
 
-    const totalPrice = this.offers.reduce((sum, offer) => sum + offer.prixKw, 0);
-    return Number((totalPrice / this.offers.length).toFixed(3));
-  }
+  const totalPrice = this.offers.reduce((sum, offer) => sum + offer.prixKw, 0);
+  return Number((totalPrice / this.offers.length).toFixed(3));
+}
 
-  offreActives(): number {
-    if (this.offers.length === 0) return 0;
-    return this.offers.filter((offer) => offer.status === true).length;
+offreActives(): number {
+  if (this.offers.length === 0) return 0;
+  return this.offers.filter((offer) => offer.status === true).length;
 
-  }
+}
 
-  quantiteTotalDisponible(): number {
-    if (this.offers.length === 0) return 0;
+quantiteTotalDisponible(): number {
+  if (this.offers.length === 0) return 0;
 
-    // Filtrer les offres avec le statut "Disponible" et sommer leurs quantités
-    return this.offers
-      .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
-      .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
-  }
+  // Filtrer les offres avec le statut "Disponible" et sommer leurs quantités
+  return this.offers
+    .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
+    .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
+}
 
 }
