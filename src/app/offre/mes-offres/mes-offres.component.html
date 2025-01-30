@@ -38,8 +38,8 @@
             <div class="value">{{quantiteTotalDisponible()}} kWh</div>
           </div>
           <div class="stat-card">
-            <h3>Prix Moyen</h3>
-            <div class="value price">{{calculePrixMoyen()}} €/KWh</div>
+            <h3>Quantité Total Vendu</h3>
+            <div class="value price">{{quantiteTotalVendu()}} KWh</div>
           </div>
           <div class="stat-card">
             <h3>Offres Actives</h3>
@@ -49,7 +49,7 @@
       </div>
 
       <div class="market-overview">
-        <h1 class="of">Offres Disponibles</h1>
+        <h1 class="of">Mes Offres</h1>
         <div class="market-actions">
           <button (click)="opendiag()">Publier une Offre</button>
         </div>
@@ -62,8 +62,8 @@
 
             <div>
               <div class="name-badge">
-                {{offer.user.nom}} {{offer.user.prenom}}
-                <span class="user-type-professional">{{offer.user.userStatus}}</span>
+                <!--{{offer.userName}}--> Vous
+                <span class="user-type-professional">Particulier</span>
               </div>
             </div>
           </div>
@@ -75,12 +75,11 @@
             <p>Type d'énergie: <span class="val">{{offer.type}}</span></p>
             <p>Status: <span class="val">
               {{ offer.status === true ? 'Disponible' : 'Vendu' }}
-          </span></p>
-          </div>
+          </span></p>          </div>
           <div class="offer-actions">
-            <button class="btn-btn-primary">Acheter</button>
-            <button class="btn-btn-secondary">Contacter</button>
-          </div>
+            <button class="btn-btn-primary">Modifier</button>
+            <button class="btn-btn-secondary" (click)="deleteOffre(offer.id)">Supprimer</button>
+        </div>
         </div>
       </div>
 
@@ -107,4 +106,3 @@
   </div>
 
   
-

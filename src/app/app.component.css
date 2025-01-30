@@ -1,0 +1,28 @@
+.main-content {
+  display: flex;
+  justify-content: center;
+  /* Centrage horizontal */
+}
+
+.content {
+  width: 100%;
+  /* Prend toute la largeur */
+  max-width: 1200px;
+  /* Largeur maximale optionnelle */
+}
+
+app-side-menu {
+ /*z-index: -1;*/
+  flex: 0 0 220px;
+}
+
+/* Style centré quand non authentifié */
+.main-content:has(app-side-menu:not(*)) .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+router-outlet {
+  margin-left: -30px;
+}

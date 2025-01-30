@@ -1,122 +1,45 @@
 import { Component } from '@angular/core';
 import { Offre } from '../model/offre.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddOffreComponent } from '../add-offre/add-offre.component';
 import { CommonModule } from '@angular/common';
+import { OffreService } from '../service/offre.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-offre-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatDialogModule,HttpClientModule],
+  providers: [OffreService],
   templateUrl: './offre-list.component.html',
   styleUrl: './offre-list.component.css'
 })
 export class OffreListComponent {
-  offers: Offre[] = [
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      5000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      5000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      5000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      5000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      5000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      5000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      5000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      1000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Disponible'
-    ),
-    new Offre(
-      '1',
-      'EDF Énergies',
-      'Professionnel',
-      1000,
-      '20-02-2025',
-      'Éolien',
-      0.12,
-      true,
-      'Indisponible'
-    ),
-  ];
+  offers: Offre[] = [];
 
   offersPerPage = 6;
   currentPage = 1;
-  constructor(private dialog:MatDialog) { }
+  constructor(private dialog:MatDialog,private offreservice:OffreService) { }
+  
+  ngOnInit(): void {
+    this.getOffers();
+    this.offers.reverse();
+  }
+  
+  getOffers(): void {
+    this.offreservice.getOffers().subscribe(
+      (data: Offre[]) => {
+        console.log('response');
+        console.log(data);
+        this.offers = data; 
+         
+      },
+      (error) => {
+        console.error('Error fetching offers:', error);
+      }
+    );
+  }
+  
   opendiag(): void {
     console.log("ll")
     this.dialog.open(AddOffreComponent);
@@ -152,7 +75,7 @@ export class OffreListComponent {
 
   offreActives(): number {
     if (this.offers.length === 0) return 0;
-    return this.offers.filter((offer) => offer.status === 'Disponible').length;
+    return this.offers.filter((offer) => offer.status === true).length;
 
   }
 
@@ -161,7 +84,7 @@ export class OffreListComponent {
 
     // Filtrer les offres avec le statut "Disponible" et sommer leurs quantités
     return this.offers
-      .filter((offer) => offer.status === 'Disponible') // Garder seulement les offres disponibles
+      .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
       .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
   }
 

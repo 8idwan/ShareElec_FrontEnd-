@@ -8,9 +8,12 @@
   </div>
   
   <div class="account-options">
-    <div class="auth-buttons">
-      <a href="login.html" class="btn-login">Connexion</a>
-      <a href="register.html" class="btn-register">Inscription</a>
+    <div class="auth-buttons" *ngIf=false>
+      <a href="login.html"  class="btn-login">Connexion</a>
     </div>
+
+    <div class="auth-buttons" *ngIf=true>
+      <a href="login.html"  class="btn-login">Déconnexion</a>   
+     </div>
   </div>
 </nav>
