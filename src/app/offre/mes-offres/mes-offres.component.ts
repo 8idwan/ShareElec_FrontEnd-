@@ -16,9 +16,7 @@ import { MesOffres } from '../model/mes-offres.model';
   styleUrl: './mes-offres.component.css'
 })
 export class MesOffresComponent {
-  offers: MesOffres[] = [
-      
-    ];
+  offers: MesOffres[] = [];
   
     offersPerPage = 6;
     currentPage = 1;
@@ -46,7 +44,17 @@ export class MesOffresComponent {
     opendiag(): void {
       console.log("ll")
       this.dialog.open(AddOffreComponent);
+      
   
+    }
+
+    deleteOffre(id:any): void {
+      console.log(id);
+      this.offreservice.deleteOffre(id).subscribe(
+        (res) => {
+          console.log(res);
+          this.offers = this.offers.filter(offer => offer.id !== id);
+        });
     }
 
 
@@ -73,13 +81,13 @@ export class MesOffresComponent {
   
     quantiteTotalVendu(): number {
       return this.offers
-        .filter(offer => offer.status === 'Vendu')
+        .filter(offer => offer.status === true)
         .reduce((sum, offer) => sum + offer.quantite, 0);
     }
   
     offreActives(): number {
       if (this.offers.length === 0) return 0;
-      return this.offers.filter((offer) => offer.status === 'Disponible').length;
+      return this.offers.filter((offer) => offer.status === true).length;
   
     }
   
@@ -88,7 +96,7 @@ export class MesOffresComponent {
   
       // Filtrer les offres avec le statut "Disponible" et sommer leurs quantités
       return this.offers
-        .filter((offer) => offer.status === 'Disponible') // Garder seulement les offres disponibles
+        .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
         .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
     }
   
