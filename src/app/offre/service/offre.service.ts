@@ -17,14 +17,14 @@ export class OffreService {
 
   }
 
-  createJob=(Job : Object) : Observable<Offre>=>{
+  createOffre=(Offre : Object) : Observable<Offre>=>{
     const options = {
       headers: new HttpHeaders(
         { 'content-type': 'application/json'}
         )
     };
     return(this.http.post<Offre>(
-      `${this.baseUrl}/api/Offre/add/`,
+      `${this.baseUrl}/api/Offre/add`,
       Offre,
       options));
   }
