@@ -23,6 +23,7 @@ export class OffreListComponent {
   
   ngOnInit(): void {
     this.getOffers();
+    this.offers.reverse();
   }
   
   getOffers(): void {

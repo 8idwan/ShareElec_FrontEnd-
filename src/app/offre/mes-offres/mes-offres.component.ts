@@ -24,6 +24,7 @@ export class MesOffresComponent {
 
     ngOnInit(): void {
       this.MesOffre();
+      this.offers.reverse();
     }
     
     MesOffre(): void {
@@ -33,7 +34,7 @@ export class MesOffresComponent {
           console.log('Mes Offre');
           console.log(data);
           this.offers = data; 
-           
+         
         },
         (error) => {
           console.error('Error fetching offers:', error);

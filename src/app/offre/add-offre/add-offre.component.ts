@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { OffreService } from '../service/offre.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-offre',
@@ -21,7 +21,8 @@ export class AddOffreComponent {
   constructor(
     private fb: FormBuilder,
     private offreservice: OffreService,
-    private dialogRef: MatDialogRef<AddOffreComponent>
+    private dialogRef: MatDialogRef<AddOffreComponent>,
+    private router: Router
   ) {
     this.addform = this.fb.group({
       quantite: [null, [Validators.required, Validators.min(1)]],
@@ -49,7 +50,7 @@ export class AddOffreComponent {
         next: (res) => {
           console.log('Success:', res);
           this.dialogRef.close(res);
-       
+          this.router.navigateByUrl('/mesoffres'); 
         },
         error: (error) => {
           console.error('Error details:', error);
