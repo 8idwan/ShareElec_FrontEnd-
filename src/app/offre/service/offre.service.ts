@@ -17,6 +17,10 @@ export class OffreService {
 
   }
 
+  getOffersByUserId = (userId : any):Observable<Offre[]>=>{
+    return this.http.get<Offre[]>(`${this.baseUrl}/api/Offre/offres/user/${userId}`);
+  }
+
   createOffre=(Offre : Object) : Observable<Offre>=>{
     const options = {
       headers: new HttpHeaders(
