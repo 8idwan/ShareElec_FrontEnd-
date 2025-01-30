@@ -74,7 +74,7 @@ export class OffreListComponent {
 
   offreActives(): number {
     if (this.offers.length === 0) return 0;
-    return this.offers.filter((offer) => offer.status === 'Disponible').length;
+    return this.offers.filter((offer) => offer.status === true).length;
 
   }
 
@@ -83,7 +83,7 @@ export class OffreListComponent {
 
     // Filtrer les offres avec le statut "Disponible" et sommer leurs quantités
     return this.offers
-      .filter((offer) => offer.status === 'Disponible') // Garder seulement les offres disponibles
+      .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
       .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
   }
 

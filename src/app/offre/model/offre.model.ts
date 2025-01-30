@@ -1,12 +1,12 @@
 export class Offre {
   constructor(
-    public _id: string,
+    public id: number,
     public quantite: number,
     public date: string,
     public type: string,
     public prixKw: number,
     public vendDetails: boolean,
-    public status: string,
+    public status: boolean,
     public user: {
       idUtilisateure: number;
       nom: string;
