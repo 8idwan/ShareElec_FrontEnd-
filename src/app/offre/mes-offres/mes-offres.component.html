@@ -1,0 +1,107 @@
+
+  <!-- Rest of the content -->
+  <div class="app-container">
+    
+
+    <main>
+      <div class="search-filters-container">
+        <div class="search-bar">
+          <input type="text" placeholder="Rechercher une offre...">
+          <button class="btn-search">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" />
+            </svg>
+          </button>
+        </div>
+        <div class="filters">
+          <select class="filter-select" id="typeFilter">
+            <option value="">Type d'utilisateur</option>
+            <option value="particulier">Particulier</option>
+            <option value="professionnel">Professionnel</option>
+          </select>
+          <select class="filter-select" id="energyFilter">
+            <option value="">Type d'énergie</option>
+            <option value="solaire">Solaire</option>
+            <option value="eolien">Éolien</option>
+            <option value="hydraulique">Hydraulique</option>
+          </select>
+          <select class="filter-select" id="priceFilter">
+            <option value="">Prix</option>
+            <option value="asc">Prix croissant</option>
+            <option value="desc">Prix décroissant</option>
+          </select>
+          
+        </div>
+        <div class="market-stats">
+          <div class="stat-card">
+            <h3>Quantité Total Disponible </h3>
+            <div class="value">{{quantiteTotalDisponible()}} kWh</div>
+          </div>
+          <div class="stat-card">
+            <h3>Quantité Total Vendu</h3>
+            <div class="value price">{{quantiteTotalVendu()}} KWh</div>
+          </div>
+          <div class="stat-card">
+            <h3>Offres Actives</h3>
+            <div class="value">{{offreActives()}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-overview">
+        <h1 class="of">Mes Offres</h1>
+        <div class="market-actions">
+          <button (click)="opendiag()">Publier une Offre</button>
+        </div>
+      </div>
+
+      <div class="offers-grid">
+        <div class="offer-card" *ngFor="let offer of paginatedOffers">
+          <div class="user-info">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzJweCIgd2lkdGg9IjMycHgiIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTTIyNCAyNTZBMTI4IDEyOCAwIDEgMCAyMjQgMGExMjggMTI4IDAgMSAwIDAgMjU2em0tNDUuNyA0OEM3OS44IDMwNCAwIDM4My44IDAgNDgyLjNDMCA0OTguNyAxMy4zIDUxMiAyOS43IDUxMmwzODguNiAwYzE2LjQgMCAyOS43LTEzLjMgMjkuNy0yOS43QzQ0OCAzODMuOCAzNjguMiAzMDQgMjY5LjcgMzA0bC05MS40IDB6Ii8+PC9zdmc+" alt="User Icon" width="28" height="28">
+
+            <div>
+              <div class="name-badge">
+                <!--{{offer.userName}}--> Vous
+                <span class="user-type-professional">Particulier</span>
+              </div>
+            </div>
+          </div>
+          <span class="offer-timestamp">{{offer.date}}</span>
+          <div class="offer-details">
+            <p class="qt">Quantité disponible: <span class="val">{{offer.quantite}} kWh </span> </p>
+            <p>Vend par detail: <span class="val">{{offer.vendDetails}}</span></p>
+            <p>Prix unitaire: <span class="val">{{offer.prixKw}} €/kWh</span></p>
+            <p>Type d'énergie: <span class="val">{{offer.type}}</span></p>
+            <p>Status: <span class="val">{{offer.status}}</span></p>
+          </div>
+          <div class="offer-actions">
+            <button class="btn-btn-primary">Modifier</button>
+            <button class="btn-btn-secondary">Supprimer</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <button 
+          (click)="changePage(-1)" 
+          [disabled]="currentPage === 1"
+          class="pagination-btn"
+        >
+          Précédent
+        </button>
+        <span class="pagination-info">Page {{currentPage}} / {{totalPages}}</span>
+        <button 
+          (click)="changePage(1)" 
+          [disabled]="currentPage === totalPages"
+          class="pagination-btn"
+        >
+          Suivant
+        </button>
+      </div>
+
+      
+    </main>
+  </div>
+
+  
