@@ -30,8 +30,8 @@ export class OffreService {
         )
     };
     return(this.http.post<Offre>(
-      `${this.baseUrl}/api/Offre/add,
-      Offre`,
+      `${this.baseUrl}/api/Offre/add`,
+      Offre,
       options));
   }
 

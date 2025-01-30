@@ -27,6 +27,7 @@ export class MesOffresComponent {
 
   ngOnInit(): void {
     this.MesOffre();
+    this.offers.reverse();
   }
 
   MesOffre(): void {
@@ -66,7 +67,7 @@ export class MesOffresComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       id: offer.id,
-      userId: offer.userId,  // Ajoutez cette ligne
+      userId: offer.userId,
       quantite: offer.quantite,
       vendDetails: offer.vendDetails,
       type: offer.type,

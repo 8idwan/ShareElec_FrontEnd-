@@ -1,49 +1,69 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { OffreService } from '../service/offre.service';
+
 
 @Component({
   selector: 'app-add-offre',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, MatDialogModule, HttpClientModule],
+  providers: [OffreService],
   templateUrl: './add-offre.component.html',
   styleUrl: './add-offre.component.css'
 })
 export class AddOffreComponent {
-
   addform: FormGroup;
-   user : any;
+  user: any;
 
-  constructor(private fb: FormBuilder) {
-    //this.userid=localStorage.getItem('userid');
-    this.user;
+  constructor(
+    private fb: FormBuilder,
+    private offreservice: OffreService,
+    private dialogRef: MatDialogRef<AddOffreComponent>
+  ) {
     this.addform = this.fb.group({
-      quantite: [null, [Validators.required, Validators.min(1)]], 
-      vendDetails: [null, Validators.required],
-      type: [null, Validators.required], 
-      prixKw: [null, [Validators.required, Validators.min(0)]], // Prix unitaire
+      quantite: [null, [Validators.required, Validators.min(1)]],
+      vendDetails: [true, Validators.required],
+      type: ['', Validators.required],
+      prixKw: [null, [Validators.required, Validators.min(0)]],
     });
-  }
-
-  ngOnInit(){
   }
 
   onSubmit() {
     if (this.addform.valid) {
       const formData = {
-        ...this.addform.value,
-        /*userName: "this.user.userName",
-        userStatus: "this.user.userStatus",*/
-        userId:"this.user.userId",
-        status: 'active',
-        date: new Date().toISOString()
-      }
-      console.log('Valeurs du formulaire :', formData);
+        quantite: Number(this.addform.value.quantite),
+        vendDetails: Boolean(this.addform.value.vendDetails),
+        type: String(this.addform.value.type),
+        prixKw: Number(this.addform.value.prixKw),
+        userId: 2,
+        status: true, 
+        date: new Date().toISOString().split('T')[0]
+      };
 
-      // Actions supplémentaires, comme l'envoi au backend
-      console.log(JSON.stringify(formData));
+      console.log('Valeurs du formulaire :', formData);
+      
+      this.offreservice.createOffre(formData).subscribe({
+        next: (res) => {
+          console.log('Success:', res);
+          this.dialogRef.close(res);
+       
+        },
+        error: (error) => {
+          console.error('Error details:', error);
+        }
+      });
     } else {
+      // Log specific validation errors
+      Object.keys(this.addform.controls).forEach(key => {
+        const control = this.addform.get(key);
+        if (control?.errors) {
+          console.log(`${key} validation errors:`, control.errors);
+        }
+      });
       console.log('Le formulaire contient des erreurs.');
     }
   }
-
 }
