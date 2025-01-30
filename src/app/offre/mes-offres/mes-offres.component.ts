@@ -33,7 +33,7 @@ constructor(private dialog:MatDialog,private offreservice:OffreService) { }
     MesOffre(): void {
       console.log("mes")
       this.offreservice.getOffersByUserId(2).subscribe(
-        (data: Offre[]) => {
+        (data: MesOffres[]) => {
           console.log('Mes Offre');
           console.log(data);
           this.offers = data; 
@@ -79,7 +79,7 @@ constructor(private dialog:MatDialog,private offreservice:OffreService) { }
         this.currentPage += direction;
 
       }
-    );
+    
   }
 
 
