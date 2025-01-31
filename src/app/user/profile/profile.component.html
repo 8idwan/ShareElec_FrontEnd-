@@ -9,11 +9,37 @@
     <!-- <app-header></app-header> -->
     <div class="flex flex-col items-center p-8 bg-gray-100 min-h-screen">
 
-        <div class="flex m-3 gap-10 w-full max-w-7xl">
-            <p>Section 1</p>
+        <div class="flex m-3 gap-10 w-full max-w-7xl bg-white p-6 rounded-lg shadow-md">
+            <!-- Profile Image -->
+            <div class="relative">
+                <div class="w-24 h-24 bg-gray-300 rounded-full"></div>
+                <button class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full">
+                    ✏️
+                </button>
+            </div>
+    
+            <!-- User Information -->
+            <div class="flex flex-col">
+                <div class="flex items-center gap-3">
+                    <h2 class="text-2xl font-semibold">Marie Durant</h2>
+                    <button class="bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center">
+                        ✏️ Modifier
+                    </button>
+                    <button class="bg-red-500 text-white px-3 py-1 rounded-lg flex items-center">
+                        Delete
+                    </button>
+                </div>
+                <div class="mt-1">
+                    <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-md text-sm">Particulier</span>
+                </div>
+                <div class="mt-2 text-gray-600">
+                    <span>Membre depuis: Jan 2023</span> • 
+                    <span>15 transactions</span> • 
+                    <span>Note: 4.8/5</span>
+                </div>
+            </div>
         </div>
     
-        <!-- Section 1: Account Balance, Transactions, Alerts -->
         <div class="flex m-3 gap-10 w-full max-w-7xl">
             
             <!-- Account Balance Section -->

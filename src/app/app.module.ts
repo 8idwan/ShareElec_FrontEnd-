@@ -13,7 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule, DatePipe } from '@angular/common';
 import { OffreListComponent } from './offre/offre-list/offre-list.component';
 import { UserModule } from './user/user.module';
-
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './user/user.service';
 @NgModule({
   declarations: [
    
@@ -27,9 +28,9 @@ import { UserModule } from './user/user.module';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    
+    HttpClientModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,UserService],
   bootstrap: []
 })
 export class AppModule {}
