@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { UserRoutingModule } from './user-routing.module';
-
+import { LoginSuccessComponent } from './login-success/login-success.component';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    SignupComponent,
-    ProfileComponent
-  ],
   imports: [
     CommonModule,
-    UserRoutingModule
-  ]
+    FormsModule,
+    HttpClientModule,
+    SignupComponent,
+    LoginComponent,
+    ProfileComponent,
+    LoginSuccessComponent
+  ],
 })
 export class UserModule { }

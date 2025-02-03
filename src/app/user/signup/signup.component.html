@@ -1,83 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-</head>
-<body>
+
     <div class="flex justify-center items-center h-screen bg-gray-100">
         <div class="flex flex-col gap-6 p-8 bg-white shadow-lg rounded-md w-96 md:w-[500px]">
-            <h2 class="text-3xl font-bold text-blue-500 text-center">Inscription</h2>
-        
-            <form action="#" method="POST" class="flex flex-col gap-4">
-                <!-- First Name & Last Name in a Row -->
-                <div class="flex flex-row gap-4 justify-center">
-                    <input type="text" name="first_name" id="first_name" placeholder="Prénom" required
-                        class="flex-1 outline-none py-2 p-2 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-            
-                    <input type="text" name="last_name" id="last_name" placeholder="Nom" required
-                        class="flex-1 outline-none py-2 p-2 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                </div>
-        
-                <!-- Email Field -->
-                <input type="email" name="mail" id="mail" placeholder="Email" required
-                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-        
-                <!-- Password & Confirm Password in a Row -->
-                <!-- <div class="flex flex-row gap-4 justify-center"> -->
-                <input type="password" name="password" id="password" placeholder="Mot de passe" required
-                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-        
-                <input type="password" name="confirm_password" id="conf_password" placeholder="Confirmer le mot de passe" required
-                    class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                <!-- </div> -->
-        
-                <!-- Account Type Selection -->
-                <label class="font-bold">Type de Profile</label>
-                <div class="flex flex-row gap-4 justify-center">
-                    <button type="button"
-                        class="flex-1 py-3 bg-gray-200 text-gray-700 font-semibold rounded-md cursor-pointer hover:bg-blue-600 transition">
-                        Particulier
-                    </button>
-                    <button type="button"
-                        class="flex-1 py-3 bg-gray-200 text-gray-700 font-semibold rounded-md cursor-pointer hover:bg-blue-600 transition">
-                        Professionnel
-                    </button>
-                </div>
-        
-                <!-- Sign-Up Button -->
-                <button type="submit"
-                    class="bg-blue-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-blue-600 transition">
-                    S'inscrire
-                </button>
-            </form>
-            <p class="text-center text-gray-500">Déjà inscrit ? <a href="/user/login" class="text-blue-500 hover:underline">Se connecter</a></p>
-    
-            <div class="flex items-center my-4">
-                <hr class="flex-grow border-gray-300">
-                <span class="mx-3 text-gray-500">Ou</span>
-                <hr class="flex-grow border-gray-300">
+          <h2 class="text-3xl font-bold text-blue-500 text-center">Inscription</h2>
+      
+          <!-- The form calls signUp() without passing any argument -->
+          <form (ngSubmit)="signUp()" #signupForm="ngForm" class="flex flex-col gap-4">
+      
+            <div class="flex flex-row gap-4 justify-center">
+              <input
+                type="text"
+                [(ngModel)]="user.prenom"
+                name="prenom"
+                placeholder="Prénom"
+                required
+                class="flex-1 outline-none py-2 p-2 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              />
+              <input
+                type="text"
+                [(ngModel)]="user.nom"
+                name="nom"
+                placeholder="Nom"
+                required
+                class="flex-1 outline-none py-2 p-2 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              />
             </div>
-    
-            <button type="button"
-                class="flex items-center justify-center bg-red-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-red-600 transition">
-                <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 mr-2" alt="Google">
-                Inscription avec Google
+      
+            <input
+              type="email"
+              [(ngModel)]="user.email"
+              name="email"
+              placeholder="Email"
+              required
+              class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            />
+      
+            <input
+              type="text"
+              [(ngModel)]="user.numeroTelephone"
+              name="numeroTelephone"
+              placeholder="Numéro de téléphone"
+              required
+              class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            />
+      
+            <input
+              type="password"
+              [(ngModel)]="user.motDePasse"
+              name="motDePasse"
+              placeholder="Mot de passe"
+              required
+              class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            />
+      
+            <input
+              type="password"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirmer le mot de passe"
+              required
+              class="outline-none p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+            />
+      
+            <button
+              type="submit"
+              class="bg-blue-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-blue-600 transition"
+            >
+              Sign Up
             </button>
+          </form>
+      
+          <p class="text-red-500 text-center" *ngIf="errorMessage">{{ errorMessage }}</p>
+          <p class="text-green-500 text-center" *ngIf="successMessage">{{ successMessage }}</p>
         </div>
-    </div>
-<script>
-    document.querySelector('form').addEventListener('submit', function(event) {
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('conf_password').value;
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match');
-            event.preventDefault();
-        }
-    });
-</script>
-        
-</body>
-</html>
+      </div>
+      

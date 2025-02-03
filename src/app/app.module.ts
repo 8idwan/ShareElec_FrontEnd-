@@ -1,36 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component'; // Standalone component
+import { AppComponent } from './app.component'; 
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
-
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
-import { CommonModule, DatePipe } from '@angular/common';
-import { OffreListComponent } from './offre/offre-list/offre-list.component';
 import { UserModule } from './user/user.module';
-import { HttpClientModule } from '@angular/common/http';
-import { UserService } from './user/user.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
-  declarations: [
-   
-  ],
   imports: [
-    CommonModule,
     BrowserModule,
-     BrowserAnimationsModule,
-    RouterModule.forRoot(routes) ,// Configurer les routes
-    MatFormFieldModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    HttpClientModule
+    MatButtonModule,
+    RouterModule.forRoot(routes),
+    UserModule,
+    AppComponent  // Import AppComponent here instead of declarations if it's standalone
   ],
-  providers: [DatePipe,UserService],
-  bootstrap: []
+  providers: [],
+  // bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
