@@ -25,7 +25,7 @@ export class MesOffresComponent {
 
     ngOnInit(): void {
       this.MesOffre();
-      this.offers.reverse();
+      //this.offers.reverse();
     }
     
     MesOffre(): void {
@@ -44,10 +44,17 @@ export class MesOffresComponent {
     }
 
     opendiag(): void {
-      console.log("ll")
-      this.dialog.open(AddOffreComponent);
+      console.log('Opening dialog...');
+      const dialogRef = this.dialog.open(AddOffreComponent);
       
-
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result === 'success') {
+          console.log('Dialog closed successfully - refreshing offers');
+          setTimeout(() => {  // Add a small delay to ensure the backend is updated
+            this.MesOffre();
+          }, 100);
+        }
+      });
     }
 
     openEditDialog(offer: MesOffres): void {

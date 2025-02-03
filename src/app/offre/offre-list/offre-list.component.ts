@@ -38,17 +38,22 @@ export class OffreListComponent {
         console.error('Error fetching offers:', error);
       }
     );
-    this.offers.reverse();
+    //this.offers.reverse();
   }
 
   opendiag(): void {
+    console.log('Opening dialog...');
     const dialogRef = this.dialog.open(AddOffreComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("closed");
-      this.getOffers()
+    
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'success') {
+        console.log('Dialog closed successfully - refreshing offers');
+        setTimeout(() => {  // Add a small delay to ensure the backend is updated
+          this.getOffers();
+        }, 100);
+      }
     });
-
-  }
+}
 
 
 

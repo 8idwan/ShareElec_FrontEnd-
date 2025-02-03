@@ -52,8 +52,7 @@ export class AddOffreComponent {
       this.offreservice.createOffre(formData).subscribe({
         next: (res) => {
           console.log('Success:', res);
-          this.dialogRef.close(res);
-          this.router.navigateByUrl('/mesoffres'); 
+          this.dialogRef.close('success');
         },
         error: (error) => {
           console.error('Error details:', error);
