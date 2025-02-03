@@ -40,7 +40,16 @@ export class UserService {
 
   // ✅ Changed to match backend endpoint path
   login(credentials: LoginRequestModel): Observable<{ token: string; utilisateur: UserResponseModel }> {
-    return this.http.post<{ token: string; utilisateur: UserResponseModel }>(`${this.baseUrl}/login`, credentials);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+
+    return this.http.post<{ token: string; utilisateur: UserResponseModel }>(
+      `${this.baseUrl}/login`, 
+      credentials,
+      { headers }
+    );
   }
 
   // ✅ Added to match backend endpoint

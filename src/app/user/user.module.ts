@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { LoginSuccessComponent } from './login-success/login-success.component';
 
 @NgModule({
   imports: [
@@ -16,7 +15,6 @@ import { LoginSuccessComponent } from './login-success/login-success.component';
     SignupComponent,
     LoginComponent,
     ProfileComponent,
-    LoginSuccessComponent
   ],
 })
 export class UserModule { }

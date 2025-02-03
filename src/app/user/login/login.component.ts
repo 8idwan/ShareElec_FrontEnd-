@@ -16,34 +16,37 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class LoginComponent {
   email: string = '';
-  motDePasse: string = '';
+  password: string = '';
   errorMessage: string = '';
 
   constructor(private userService: UserService, private router: Router) {}
 
   login() {
-    console.log('Login function triggered');
+    console.log('Attempting login with:', { email: this.email }); // Don't log password
+    
     const credentials: LoginRequestModel = { 
       email: this.email, 
-      motDePasse: this.motDePasse
+      password: this.password
     };
   
-    this.userService.login(credentials).subscribe(
-      response => {
-        console.log('Successful login:', response);
-        if (response && response.token) {  // ✅ Ensure the key matches backend response
+    this.userService.login(credentials).subscribe({
+      next: (response) => {
+        console.log('Login response:', response);
+        if (response && response.token) {
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/login-success']);
+          this.router.navigate(['/']);
         } else {
-          console.error('Login response missing token:', response);
-          this.errorMessage = 'Identifiants incorrects';
+          this.errorMessage = 'Réponse invalide du serveur';
         }
       },
-      error => {
-        console.error('Login failed:', error);
-        this.errorMessage = 'Identifiants incorrects';
+      error: (error) => {
+        console.error('Login error:', error);
+        if (error.status === 0) {
+          this.errorMessage = 'Impossible de joindre le serveur';
+        } else {
+          this.errorMessage = error.error?.message || 'Erreur de connexion';
+        }
       }
-    );    
-  
+    });
   }
 }
