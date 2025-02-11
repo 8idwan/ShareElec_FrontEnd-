@@ -4,7 +4,7 @@ import { UserRequestModel } from '../model/user-request.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -19,8 +19,7 @@ export class SignupComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private userService: UserService) {
-    // Log when component is initialized
+  constructor(private userService: UserService, private router: Router) {
     console.log('SignupComponent initialized');
   }
 
@@ -30,7 +29,6 @@ export class SignupComponent {
       nom: this.user.nom,
       email: this.user.email,
       numeroTelephone: this.user.numeroTelephone,
-      // Don't log the actual password for security
       hasPassword: !!this.user.motDePasse
     });
 
@@ -44,6 +42,8 @@ export class SignupComponent {
       next: (response) => {
         console.log('Signup successful:', response);
         this.successMessage = 'Un code de vérification a été envoyé à votre email.';
+        this.router.navigate(['/user/verify-email']);
+
       },
       error: (error) => {
         console.error('Signup failed:', error);

@@ -10,7 +10,6 @@ import { routes } from './app.routes';
 import { UserModule } from './user/user.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
 @NgModule({
   imports: [
     BrowserModule,

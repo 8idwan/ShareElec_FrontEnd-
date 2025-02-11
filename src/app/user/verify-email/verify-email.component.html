@@ -1,0 +1,32 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+  <div class="flex flex-col gap-4 p-8 bg-white shadow-lg rounded-md w-80">
+    <h2 class="text-center text-4xl font-bold text-blue-500">Vérification de l'email</h2>
+    
+    <!-- Bind the form to your reactive FormGroup -->
+    <form [formGroup]="verifyEmailForm" (ngSubmit)="verifyEmail()" class="flex flex-col gap-4">
+        <input 
+          type="email" 
+          placeholder="Email" 
+          formControlName="email"
+          required 
+          class="p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none">
+          
+        <input 
+          type="text" 
+          placeholder="Code de vérification" 
+          formControlName="code"
+          required 
+          class="p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none">
+          
+        <button 
+          type="submit" 
+          class="bg-blue-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-blue-600 transition">
+          Vérifier
+        </button>
+    </form>
+
+    <!-- Display success or error messages -->
+    <p *ngIf="successMessage" class="text-green-500">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+  </div>
+</div>

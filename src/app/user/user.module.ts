@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
     SignupComponent,
     LoginComponent,
     ProfileComponent,
+    VerifyEmailComponent
   ],
 })
 export class UserModule { }
