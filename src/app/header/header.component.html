@@ -1,16 +1,23 @@
 <nav class="top-nav">
   <div class="logo">
     <svg width="40" height="40" viewBox="0 0 40 40">
-      <path d="M20 0L40 20L20 40L0 20L20 0Z" fill="#2196F3"/>
-      <path d="M20 10L30 20L20 30L10 20L20 10Z" fill="white"/>
+      <path d="M20 0L40 20L20 40L0 20L20 0Z" fill="#2196F3"></path>
+      <path d="M20 10L30 20L20 30L10 20L20 10Z" fill="white"></path>
     </svg>
     <span>Tricité</span>
   </div>
   
   <div class="account-options">
-    <div class="auth-buttons">
-      <a href="/user/login" class="btn-login">Connexion</a>
-      <a href="/user/signup" class="btn-register">Inscription</a>
+    <!-- If NOT logged in -->
+    <div class="auth-buttons" *ngIf="!isLoggedIn()">
+      <!-- Use routerLink instead of href to leverage Angular routing -->
+      <a routerLink="/user/login" class="btn-login">Connexion</a>
+      <a routerLink="/user/signup" class="btn-register">Inscription</a>
+    </div>
+
+    <!-- If logged in -->
+    <div class="auth-buttons" *ngIf="isLoggedIn()">
+      <button (click)="logout()" class="btn-logout">Déconnexion</button>
     </div>
   </div>
 </nav>

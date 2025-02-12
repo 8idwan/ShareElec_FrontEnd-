@@ -1,3 +1,4 @@
+// login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../service/user.service';
@@ -22,7 +23,7 @@ export class LoginComponent {
   constructor(private userService: UserService, private router: Router) {}
 
   login() {
-    console.log('Attempting login with:', { email: this.email }); // Don't log password
+    console.log('Attempting login with:', { email: this.email }); 
     
     const credentials: LoginRequestModel = { 
       email: this.email, 
@@ -33,7 +34,10 @@ export class LoginComponent {
       next: (response) => {
         console.log('Login response:', response);
         if (response && response.token) {
+          // 1) STORE TOKEN IN LOCALSTORAGE
           localStorage.setItem('token', response.token);
+
+          // 2) REDIRECT SOMEWHERE (e.g. homepage or dashboard)
           this.router.navigate(['/']);
         } else {
           this.errorMessage = 'Réponse invalide du serveur';
