@@ -3,11 +3,12 @@ import { Offre } from '../model/offre.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOffreComponent } from '../add-offre/add-offre.component';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-offre-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,HttpClientModule],
   templateUrl: './offre-list.component.html',
   styleUrl: './offre-list.component.css'
 })

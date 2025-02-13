@@ -27,10 +27,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     AppComponent  // Import AppComponent here instead of declarations if it's standalone
   ],
   providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true 
-  }],
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true 
+    }],
   // bootstrap: [AppComponent]
 })
 export class AppModule { }

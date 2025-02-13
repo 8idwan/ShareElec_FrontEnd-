@@ -4,8 +4,8 @@ import { OffreListComponent } from './offre-list/offre-list.component';
 
 const routes: Routes = [
   {path:"offres",component:OffreListComponent},
-  
-  
+
+
 ];
 
 @NgModule({

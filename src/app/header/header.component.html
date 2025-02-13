@@ -17,6 +17,7 @@
 
     <!-- If logged in -->
     <div class="auth-buttons" *ngIf="isLoggedIn()">
+      <button class="btn-logout"><a routerLink="/user/profile">Profile</a></button>
       <button (click)="logout()" class="btn-logout">Déconnexion</button>
     </div>
   </div>

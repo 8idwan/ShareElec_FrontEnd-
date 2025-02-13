@@ -42,7 +42,7 @@ export class SignupComponent {
       next: (response) => {
         console.log('Signup successful:', response);
         this.successMessage = 'Un code de vérification a été envoyé à votre email.';
-        this.router.navigate(['/user/verify-email']);
+        this.router.navigate(['/user/verify-email'], { queryParams: { email: this.user.email } });
 
       },
       error: (error) => {

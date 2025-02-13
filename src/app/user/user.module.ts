@@ -7,6 +7,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { UserRoutingModule } from './user-routing.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +16,10 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     SignupComponent,
     LoginComponent,
     ProfileComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    UserRoutingModule,
+    HttpClientModule
   ],
+  
 })
 export class UserModule { }

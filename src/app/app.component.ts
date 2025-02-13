@@ -7,11 +7,11 @@ import { OffreListComponent } from './offre/offre-list/offre-list.component';
 import {SignupComponent} from './user/signup/signup.component';
 import {LoginComponent} from './user/login/login.component';
 import {ProfileComponent} from './user/profile/profile.component'
-
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [CommonModule, RouterOutlet,HttpClientModule, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
