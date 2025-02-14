@@ -9,14 +9,14 @@
 
   <div class="account-options">
     <!-- If NOT logged in -->
-    <div class="auth-buttons" ngIf="!isLoggedIn()">
+    <div class="auth-buttons" *ngIf="!isLoggedIn()">
       <!-- Use routerLink instead of href to leverage Angular routing -->
       <a routerLink="/login" class="btn-login">Connexion</a>
       <a routerLink="/signup" class="btn-register">Inscription</a>
     </div>
 
     <!-- If logged in -->
-    <div class="auth-buttons"ngIf="isLoggedIn()">
+    <div class="auth-buttons" *ngIf="isLoggedIn()">
       <button (click)="logout()" class="btn-logout">Déconnexion</button>
     </div>
   </div>
