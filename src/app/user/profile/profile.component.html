@@ -1,0 +1,120 @@
+<div class="flex flex-col items-center p-8 bg-gray-100 min-h-screen">
+
+    <div class="flex m-3 gap-10 w-full max-w-7xl bg-white p-6 rounded-lg shadow-md">
+        <!-- Profile Image -->
+        <div class="relative">
+            <div class="w-24 h-24 bg-gray-300 rounded-full"></div>
+            <button class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full">
+                ✏️
+            </button>
+        </div>
+
+        <!-- User Information -->
+        <div class="flex flex-col">
+            <div class="flex items-center gap-3">
+                <h2 class="text-2xl font-semibold">
+                    {{ currentUser?.prenom }} {{ currentUser?.nom }}
+                </h2>
+                <button class="bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center">
+                    ✏️ Modifier
+                </button>
+                <button 
+                    class="bg-red-500 text-white px-3 py-1 rounded-lg flex items-center"
+                    (click)="deleteAccount()">
+                    Delete
+                </button>
+            </div>
+            <div class="mt-1">
+                <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded-md text-sm">Particulier</span>
+            </div>
+            <div class="mt-2 text-gray-600">
+                <span>Membre depuis: Jan 2023</span> • 
+                <span>15 transactions</span> • 
+                <span>Note: 4.8/5</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex m-3 gap-10 w-full max-w-7xl">
+        
+        <!-- Account Balance Section -->
+        <div class="p-8 h-80 w-1/3 border border-gray-300 bg-white shadow-md rounded-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Solde du Compte</h2>
+            <p class="text-4xl font-bold text-blue-500">
+                10 458,32 <span class="text-2xl">€</span>
+            </p>
+        </div>
+
+        <!-- Transaction Section -->
+        <div class="p-8 h-80 w-1/3 border border-gray-300 bg-white shadow-md rounded-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Transactions</h2>
+            <div class="overflow-x-auto">
+                <table class="table-auto border-collapse w-full text-left text-sm rounded-md">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-700">
+                            <th class="border border-gray-300 px-4 py-2">Type</th>
+                            <th class="border border-gray-300 px-4 py-2">Quantity</th>
+                            <th class="border border-gray-300 px-4 py-2">Prix Unitaire</th>
+                            <th class="border border-gray-300 px-4 py-2">Prix total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-gray-600">
+                            <td class="border border-gray-300 px-4 py-2">Achat</td>
+                            <td class="border border-gray-300 px-4 py-2">100kWh</td>
+                            <td class="border border-gray-300 px-4 py-2">0.12€</td>
+                            <td class="border border-gray-300 px-4 py-2">120€</td>
+                        </tr>
+                        <tr class="text-gray-600">
+                            <td class="border border-gray-300 px-4 py-2">Vente</td>
+                            <td class="border border-gray-300 px-4 py-2">50kWh</td>
+                            <td class="border border-gray-300 px-4 py-2">0.15€</td>
+                            <td class="border border-gray-300 px-4 py-2">60€</td>
+                        </tr>
+                        <tr class="text-gray-600">
+                            <td class="border border-gray-300 px-4 py-2">Achat</td>
+                            <td class="border border-gray-300 px-4 py-2">20kWh</td>
+                            <td class="border border-gray-300 px-4 py-2">0.10€</td>
+                            <td class="border border-gray-300 px-4 py-2">20€</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Alerts Section -->
+        <div class="p-8 h-80 w-1/3 border border-gray-300 bg-white shadow-md flex items-center justify-center text-lg font-semibold text-gray-700 rounded-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Alertes du Marché</h2>
+        </div>
+
+    </div>
+
+    <!-- Section 2: Below Section 1 -->
+    <div class="flex m-3 gap-10 w-full max-w-7xl">
+        <div class="p-8 h-80 w-1/3 border border-gray-300 bg-white shadow-md rounded-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">A Propos</h2>
+        </div>
+        <div class="p-8 h-80 w-2/3 border border-gray-300 bg-white shadow-md rounded-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Alertes du Marché</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex justify-center bg-blue-100  p-4 rounded-md shadow">
+                    <p class="text-4xl font-bold text-blue-500">1245 kWh</p>
+                </div>
+                <div class="flex justify-center bg-blue-100 p-4 rounded-md shadow ">
+                    <p class="text-4xl font-bold text-blue-500">900 kWh</p>
+                </div>
+                <div class="flex justify-center bg-blue-100 p-4 rounded-md shadow">
+                    <p class="text-4xl font-bold text-blue-500">0.12</p>
+                </div>
+                <div class="flex justify-center align-center bg-blue-100 p-4 rounded-md shadow">
+                    <p class="text-4xl font-bold text-blue-500">95%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
+    
