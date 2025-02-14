@@ -11,13 +11,12 @@
     <!-- If NOT logged in -->
     <div class="auth-buttons" *ngIf="!isLoggedIn()">
       <!-- Use routerLink instead of href to leverage Angular routing -->
-      <a routerLink="/user/login" class="btn-login">Connexion</a>
-      <a routerLink="/user/signup" class="btn-register">Inscription</a>
+      <a routerLink="/login" class="btn-login">Connexion</a>
+      <a routerLink="/signup" class="btn-register">Inscription</a>
     </div>
 
     <!-- If logged in -->
     <div class="auth-buttons" *ngIf="isLoggedIn()">
-      <button class="btn-logout"><a routerLink="/user/profile">Profile</a></button>
       <button (click)="logout()" class="btn-logout">Déconnexion</button>
     </div>
   </div>
