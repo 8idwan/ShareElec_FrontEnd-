@@ -1,0 +1,47 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+    <div class="flex flex-col gap-4 p-8 bg-white shadow-lg rounded-md w-80">
+      <h2 class="text-center text-4xl font-bold text-blue-500">Connexion</h2>
+
+      <form (ngSubmit)="login()" #loginForm="ngForm" class="flex flex-col gap-4">
+        <input 
+          type="email" [(ngModel)]="email" name="email" id="email" placeholder="Email"
+          required
+          class="p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+        >
+
+        <input 
+          type="password" [(ngModel)]="password" name="motDePasse" id="motDePasse" placeholder="Mot de passe"
+          required
+          class="p-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+        >
+
+        <p *ngIf="errorMessage" class="text-red-500 text-center">{{ errorMessage }}</p>
+
+        <button 
+          type="submit"
+          class="bg-blue-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-blue-600 transition"
+        >
+          Connecter
+        </button>
+      </form>
+
+
+      <a href="#" class="text-blue-500 text-center hover:underline">Mot de passe oublié?</a>
+
+      <div class="flex items-center my-4">
+        <hr class="flex-grow border-gray-300">
+        <span class="mx-3 text-gray-500">Ou</span>
+        <hr class="flex-grow border-gray-300">
+      </div>
+
+      <button 
+        type="button"
+        class="flex items-center justify-center bg-red-500 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-red-600 transition"
+      >
+        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 mr-2" alt="Google">
+        Connecter avec Google
+      </button>
+
+    </div>
+  </div>
+﻿
