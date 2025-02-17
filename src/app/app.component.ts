@@ -15,4 +15,12 @@ import { SideMenuComponent } from "./offre/side-menu/side-menu.component";
 })
 export class AppComponent {
   title = 'ShareElec';
+
+  isLoggedIn = false;
+
+  ngonInit() {
+    if(localStorage.getItem('token')!==null) {
+      this.isLoggedIn = true;
+    }
+  }
 }
