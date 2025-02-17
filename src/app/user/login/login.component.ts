@@ -41,7 +41,7 @@ export class LoginComponent {
           localStorage.setItem('currentUser', JSON.stringify(response.utilisateur));
 
           // 3) REDIRECT AFTER LOGIN
-          this.router.navigate(['/']);
+          this.router.navigate(['/user/profile']);
         } else {
           this.errorMessage = 'Réponse invalide du serveur';
         }

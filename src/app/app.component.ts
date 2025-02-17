@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -13,14 +13,15 @@ import { SideMenuComponent } from "./offre/side-menu/side-menu.component";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ShareElec';
+  isAuthenticated: boolean = false;
 
-  isLoggedIn = false;
-
-  ngonInit() {
-    if(localStorage.getItem('token')!==null) {
-      this.isLoggedIn = true;
-    }
+  ngOnInit() {
+    this.checkAuthentication();
   }
+
+  checkAuthentication() {
+    this.isAuthenticated = !!localStorage.getItem('token');
+  }  
 }

@@ -27,7 +27,8 @@ export class HeaderComponent {
   logout(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
-      this.router.navigate(['/user/login']);
+      localStorage.removeItem('currentUser');
+      this.router.navigate(['/login']);
     }
   }
 

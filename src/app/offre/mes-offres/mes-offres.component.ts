@@ -7,6 +7,7 @@ import { OffreService } from '../service/offre.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MesOffres } from '../model/mes-offres.model';
 import { EditOffreComponent } from '../edit-offre/edit-offre.component';
+import { UserResponseModel } from '../../user/model/user-response.model';
 
 @Component({
   selector: 'app-mes-offres',
@@ -21,16 +22,23 @@ export class MesOffresComponent {
   
     offersPerPage = 6;
     currentPage = 1;
+    currentUser!: UserResponseModel | null; 
+    
     constructor(private dialog:MatDialog,private offreservice:OffreService) { }
 
     ngOnInit(): void {
-      this.MesOffre();
       //this.offers.reverse();
+      // Load user from localStorage
+    const storedUserJson = localStorage.getItem('currentUser');
+    if (storedUserJson) {
+      this.currentUser = JSON.parse(storedUserJson) as UserResponseModel;
+    }
+    this.MesOffre(this.currentUser?.id);
     }
     
-    MesOffre(): void {
+    MesOffre(id:any): void {
       console.log("mes")
-      this.offreservice.getOffersByUserId(2).subscribe(
+      this.offreservice.getOffersByUserId(id).subscribe(
         (data: MesOffres[]) => {
           console.log('Mes Offre');
           console.log(data);
@@ -51,7 +59,7 @@ export class MesOffresComponent {
         if (result === 'success') {
           console.log('Dialog closed successfully - refreshing offers');
           setTimeout(() => {  // Add a small delay to ensure the backend is updated
-            this.MesOffre();
+            this.MesOffre(this.currentUser?.id);
           }, 100);
         }
       });
@@ -76,7 +84,7 @@ export class MesOffresComponent {
           this.offreservice.modifierOffer(offer.id, result).subscribe(
             (updatedOffer) => {
               console.log('Offre modifiée avec succès:', updatedOffer);
-              this.MesOffre();
+              this.MesOffre(this.currentUser?.id);
             },
             (error) => {
               console.error('Erreur lors de la modification:', error);
