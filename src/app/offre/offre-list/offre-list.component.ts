@@ -5,6 +5,7 @@ import { AddOffreComponent } from '../add-offre/add-offre.component';
 import { CommonModule } from '@angular/common';
 import { OffreService } from '../service/offre.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AcheterEnergieComponent } from '../acheter-energie/acheter-energie.component';
 
 @Component({
   selector: 'app-offre-list',
@@ -99,6 +100,24 @@ quantiteTotalDisponible(): number {
   return this.offers
     .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
     .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
+}
+
+
+acheterEnergie(offre: Offre): void {
+  const dialogRef = this.dialog.open(AcheterEnergieComponent, {
+    data: offre, // Passez l'offre sélectionnée au composant de dialogue
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === 'acheter') {
+      // Logique à exécuter après l'achat (par exemple, mettre à jour l'offre)
+      console.log('Achat confirmé pour l\'offre :', offre);
+      // Vous pouvez mettre à jour l'offre dans la liste ici, par exemple:
+      //offre.status = false; // Marquer l'offre comme vendue
+    } else {
+      console.log('Achat annulé.');
+    }
+  });
 }
 
 }
