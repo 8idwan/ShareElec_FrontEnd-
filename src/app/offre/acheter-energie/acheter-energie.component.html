@@ -31,10 +31,26 @@
           <input [value]="offre.date" disabled>
         </div>
 
-        <div *ngIf="offre.vendDetails" class="form-group">
+  
+        <div class="form-group">
           <label>Quantité Voulue (kWh)</label>
-          <input type="number" min="0" step="0.01" formControlName="quantiteVoulue" required>
-          <div *ngIf="acheterForm.get('quantiteVoulue')?.invalid && (acheterForm.get('quantiteVoulue')?.dirty || acheterForm.get('quantiteVoulue')?.touched)">
+          
+          <!-- Si vente au détail: champ éditable -->
+          <input *ngIf="offre.vendDetails" 
+                 type="number" 
+                 min="0" 
+                 step="0.01" 
+                 formControlName="quantiteVoulue" 
+                 required>
+          
+          <!-- Si pas de vente au détail: afficher la quantité totale en lecture seule -->
+          <input *ngIf="!offre.vendDetails" 
+                 type="number" 
+                 [value]="offre.quantite" 
+                 disabled>
+          
+          <!-- Message d'erreur (uniquement affiché en mode détail) -->
+          <div *ngIf="offre.vendDetails && acheterForm.get('quantiteVoulue')?.invalid && (acheterForm.get('quantiteVoulue')?.dirty || acheterForm.get('quantiteVoulue')?.touched)">
             <small class="text-danger" *ngIf="acheterForm.get('quantiteVoulue')?.errors?.['required']">
               La quantité voulue est requise.
             </small>
