@@ -37,15 +37,27 @@ export class AcheterEnergieComponent {
   }
 
   onAcheterClick(): void {
-    if (this.acheterForm.valid) {
+    if (this.offre.vendDetails) {
+      if (this.acheterForm.value.quantiteVoulue != null) {
+        // TODO: Envoyer les données d'achat (this.offre et this.acheterForm.value) au service
+        console.log('Offre à acheter:', this.offre);
+        console.log('Quantité voulue:', this.acheterForm.value.quantiteVoulue);
+        this.dialogRef.close('acheter'); // Envoyer un signal de succès à votre composant parent
+
+        // Marquez les champs comme touchés pour afficher les erreurs de validation
+        this.markAllAsTouched();
+      }
+    } else {
       // TODO: Envoyer les données d'achat (this.offre et this.acheterForm.value) au service
       console.log('Offre à acheter:', this.offre);
       console.log('Quantité voulue:', this.acheterForm.value.quantiteVoulue);
       this.dialogRef.close('acheter'); // Envoyer un signal de succès à votre composant parent
-    } else {
+
       // Marquez les champs comme touchés pour afficher les erreurs de validation
       this.markAllAsTouched();
     }
+
+
   }
 
   private markAllAsTouched() {
