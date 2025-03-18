@@ -1,0 +1,11 @@
+<div class="modal-overlay">
+    <div class="modal">
+        
+        <h2>Confirmation</h2>
+        <p class="confirmation-message">{{ data.message }}</p>
+        <div class="dialog-actions">
+            <button mat-button (click)="onCancel()" class="btn btn-danger">Annuler</button>
+            <button mat-button color="warn" (click)="onConfirm()" class="btn btn-success">Confirmer</button>
+        </div>
+    </div>
+</div>

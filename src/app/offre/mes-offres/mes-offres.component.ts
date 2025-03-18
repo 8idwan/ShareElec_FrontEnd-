@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MesOffres } from '../model/mes-offres.model';
 import { EditOffreComponent } from '../edit-offre/edit-offre.component';
 import { UserResponseModel } from '../../user/model/user-response.model';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-mes-offres',
@@ -95,12 +96,25 @@ export class MesOffresComponent {
     }
 
     deleteOffre(id:any): void {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        width: '350px',
+        data: { message: "Voulez-vous vraiment supprimer cette offre ?" }
+      });
+
       console.log(id);
-      this.offreservice.deleteOffre(id).subscribe(
-        (res) => {
-          console.log(res);
-          this.offers = this.offers.filter(offer => offer.id !== id);
-        });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.offreservice.deleteOffre(id).subscribe(
+            (res) => {
+              console.log(res);
+              this.offers = this.offers.filter(offer => offer.id !== id);
+            },
+            (error) => {
+              console.error("Erreur lors de la suppression :", error);
+            }
+          );
+        }
+      });
     }
   
     get paginatedOffers(): MesOffres[] {
