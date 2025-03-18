@@ -1,3 +1,11 @@
+/*Style pour popup alerte/*
+.warning-snackbar {
+  background-color: #ff9800;
+  color: white;
+  font-weight: bold;
+}
+
+
 /* Styles de base pour l'overlay */
 .modal-overlay {
     position: fixed;
