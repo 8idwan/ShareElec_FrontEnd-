@@ -6,8 +6,12 @@ import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 
 
-export const routes: Routes = [ {path:'',component:OffreListComponent},
-                                 {path:'mesoffres',component:MesOffresComponent},
+export const routes: Routes = [ 
+  {path:'',component:OffreListComponent},
+  { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent},
+    
+
   {
     path: 'offre',
     loadChildren: () => import('./offre/offre.module')
@@ -15,8 +19,6 @@ export const routes: Routes = [ {path:'',component:OffreListComponent},
      
   },
 
-  { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent},
 
   {
     path: 'user',
