@@ -8,7 +8,7 @@ export class Offre {
     public vendDetails: boolean,
     public status: boolean,
     public user: {
-      idUtilisateure: number;
+      id: number;
       nom: string;
       prenom: string;
       NumeroTelephone:string;

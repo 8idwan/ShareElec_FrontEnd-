@@ -51,7 +51,7 @@
       <div class="market-overview">
         <h1 class="of">Mes Offres</h1>
         <div class="market-actions">
-          <button (click)="opendiag()">Publier une Offre</button>
+          <button (click)="opendiag()" *ngIf="currentUser?.id">Publier une Offre</button>
         </div>
       </div>
 

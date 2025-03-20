@@ -66,7 +66,7 @@ export class AcheterEnergieComponent implements OnInit {
       const quantite = this.offre.vendDetails ? this.acheterForm.value.quantiteVoulue : this.offre.quantite;
       const montant = quantite * this.offre.prixKw;
 
-const transaction = new TransactionRequest(this.offre.id, montant, quantite, this.currentUser!.id, this.offre.user.idUtilisateure);
+const transaction = new TransactionRequest(this.offre.id, montant, quantite, this.currentUser!.id, this.offre.user.id);
       console.log(transaction)
       this.paymentService.createPaymentIntent(transaction).subscribe(
         async (response) => {

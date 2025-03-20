@@ -7,6 +7,7 @@ import { OffreService } from '../service/offre.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AcheterEnergieComponent } from '../acheter-energie/acheter-energie.component';
 import { FormsModule } from '@angular/forms';
+import { UserResponseModel } from '../../user/model/user-response.model';
 
 @Component({
   selector: 'app-offre-list',
@@ -27,10 +28,18 @@ export class OffreListComponent {
   selectedType: string = '';
   selectedEnergy: string = '';
   selectedPriceOrder: string = '';
+  
+  currentUser!: UserResponseModel | null; 
+  
 
   constructor(private dialog: MatDialog, private offreservice: OffreService) { }
 
   ngOnInit(): void {
+    const storedUserJson = localStorage.getItem('currentUser');
+    if (storedUserJson) {
+      this.currentUser = JSON.parse(storedUserJson) as UserResponseModel;
+      console.log('Current user:', this.currentUser.id);
+    }
     this.getOffers();
   }
 
@@ -40,6 +49,7 @@ export class OffreListComponent {
         console.log('response');
         console.log(data);
         this.offers = data;
+        this.offers = data.filter(offer => offer.status !== false);
         this.applyFilters(); // Apply filters when data is loaded
       },
       (error) => {

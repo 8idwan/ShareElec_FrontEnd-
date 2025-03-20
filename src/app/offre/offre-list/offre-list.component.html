@@ -46,7 +46,7 @@
     <div class="market-overview">
       <h1 class="of">Offres Disponibles</h1>
       <div class="market-actions">
-        <button (click)="opendiag()">Publier une Offre</button>
+        <button (click)="opendiag()" *ngIf="currentUser?.id">Publier une Offre</button>
       </div>
     </div>
 
@@ -74,8 +74,8 @@
         </span></p>
         </div>
         <div class="offer-actions">
-          <button class="btn-btn-primary"  (click)="acheterEnergie(offer)">Acheter</button>
-          <button class="btn-btn-secondary">Contacter</button>
+          <button class="btn-btn-primary" (click)="acheterEnergie(offer)" *ngIf="currentUser?.id !== offer.user.id">Acheter</button>
+          <button class="btn-btn-secondary" *ngIf="currentUser?.id !== offer.user.id">Contacter</button>
         </div>
       </div>
     </div>
