@@ -6,25 +6,32 @@ import { CommonModule } from '@angular/common';
 import { OffreService } from '../service/offre.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AcheterEnergieComponent } from '../acheter-energie/acheter-energie.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-offre-list',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, HttpClientModule],
+  imports: [CommonModule, MatDialogModule, HttpClientModule, FormsModule],
   providers: [OffreService],
   templateUrl: './offre-list.component.html',
   styleUrl: './offre-list.component.css'
 })
 export class OffreListComponent {
   offers: Offre[] = [];
-
+  filteredOffers: Offre[] = [];
   offersPerPage = 6;
   currentPage = 1;
+  
+  // Search and filter variables
+  searchTerm: string = '';
+  selectedType: string = '';
+  selectedEnergy: string = '';
+  selectedPriceOrder: string = '';
+
   constructor(private dialog: MatDialog, private offreservice: OffreService) { }
 
   ngOnInit(): void {
     this.getOffers();
-    
   }
 
   getOffers(): void {
@@ -33,19 +40,18 @@ export class OffreListComponent {
         console.log('response');
         console.log(data);
         this.offers = data;
-
+        this.applyFilters(); // Apply filters when data is loaded
       },
       (error) => {
         console.error('Error fetching offers:', error);
       }
     );
-    //this.offers.reverse();
   }
 
   opendiag(): void {
     console.log('Opening dialog...');
     const dialogRef = this.dialog.open(AddOffreComponent);
-    
+   
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'success') {
         console.log('Dialog closed successfully - refreshing offers');
@@ -54,70 +60,126 @@ export class OffreListComponent {
         }, 100);
       }
     });
-}
-
-
-
-  
-
-
-  get paginatedOffers(): Offre[] {
-  const startIndex = (this.currentPage - 1) * this.offersPerPage;
-  const endIndex = startIndex + this.offersPerPage;
-  return this.offers.slice(startIndex, endIndex);
-}
-
-  get totalPages(): number {
-  return Math.ceil(this.offers.length / this.offersPerPage);
-}
-
-changePage(direction: number): void {
-  if(
-      (direction === -1 && this.currentPage > 1) ||
-  (direction === 1 && this.currentPage < this.totalPages)
-    ) {
-  this.currentPage += direction;
-}
   }
 
-calculePrixMoyen(): number {
-  if (this.offers.length === 0) return 0;
+  // Search and filter methods
+  search(event: Event): void {
+    this.searchTerm = (event.target as HTMLInputElement).value;
+    this.currentPage = 1; // Reset to first page when searching
+    this.applyFilters();
+  }
 
-  const totalPrice = this.offers.reduce((sum, offer) => sum + offer.prixKw, 0);
-  return Number((totalPrice / this.offers.length).toFixed(3));
-}
+  applyTypeFilter(event: Event): void {
+    this.selectedType = (event.target as HTMLSelectElement).value;
+    this.currentPage = 1; // Reset to first page when filtering
+    this.applyFilters();
+  }
 
-offreActives(): number {
-  if (this.offers.length === 0) return 0;
-  return this.offers.filter((offer) => offer.status === true).length;
+  applyEnergyFilter(event: Event): void {
+    this.selectedEnergy = (event.target as HTMLSelectElement).value;
+    this.currentPage = 1; // Reset to first page when filtering
+    this.applyFilters();
+  }
 
-}
+  applyPriceFilter(event: Event): void {
+    this.selectedPriceOrder = (event.target as HTMLSelectElement).value;
+    this.currentPage = 1; // Reset to first page when filtering
+    this.applyFilters();
+  }
 
-quantiteTotalDisponible(): number {
-  if (this.offers.length === 0) return 0;
-
-  // Filtrer les offres avec le statut "Disponible" et sommer leurs quantités
-  return this.offers
-    .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
-    .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
-}
-
-
-acheterEnergie(offre: Offre): void {
-  const dialogRef = this.dialog.open(AcheterEnergieComponent, {
-    data: offre, // Passez l'offre sélectionnée au composant de dialogue
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result === 'acheter') {
-      // Logique à exécuter après l'achat (par exemple, mettre à jour l'offre)
-      console.log('Achat confirmé pour l\'offre :', offre);
-      // Vous pouvez mettre à jour l'offre dans la liste ici, par exemple:
-      //offre.status = false; // Marquer l'offre comme vendue
-    } else {
-      console.log('Achat annulé.');
+  applyFilters(): void {
+    // Start with all offers
+    let result = [...this.offers];
+    
+    // Apply search filter
+    if (this.searchTerm) {
+      const searchLower = this.searchTerm.toLowerCase();
+      result = result.filter(offer => 
+        offer.user.nom.toLowerCase().includes(searchLower) ||
+        offer.user.prenom.toLowerCase().includes(searchLower) ||
+        offer.type.toLowerCase().includes(searchLower)
+      );
     }
-  });
-}
-
+    
+    // Apply type filter
+    if (this.selectedType) {
+      result = result.filter(offer => 
+        offer.user.userStatus.toLowerCase() === this.selectedType.toLowerCase()
+      );
+    }
+    
+    // Apply energy filter
+    if (this.selectedEnergy) {
+      result = result.filter(offer => 
+        offer.type.toLowerCase() === this.selectedEnergy.toLowerCase()
+      );
+    }
+    
+    // Apply price sorting
+    if (this.selectedPriceOrder) {
+      result.sort((a, b) => {
+        if (this.selectedPriceOrder === 'asc') {
+          return a.prixKw - b.prixKw;
+        } else {
+          return b.prixKw - a.prixKw;
+        }
+      });
+    }
+    
+    this.filteredOffers = result;
+  }
+  
+  get paginatedOffers(): Offre[] {
+    const startIndex = (this.currentPage - 1) * this.offersPerPage;
+    const endIndex = startIndex + this.offersPerPage;
+    return this.filteredOffers.slice(startIndex, endIndex);
+  }
+  
+  get totalPages(): number {
+    return Math.ceil(this.filteredOffers.length / this.offersPerPage);
+  }
+  
+  changePage(direction: number): void {
+    if(
+      (direction === -1 && this.currentPage > 1) ||
+      (direction === 1 && this.currentPage < this.totalPages)
+    ) {
+      this.currentPage += direction;
+    }
+  }
+  
+  calculePrixMoyen(): number {
+    if (this.filteredOffers.length === 0) return 0;
+    const totalPrice = this.filteredOffers.reduce((sum, offer) => sum + offer.prixKw, 0);
+    return Number((totalPrice / this.filteredOffers.length).toFixed(3));
+  }
+  
+  offreActives(): number {
+    if (this.filteredOffers.length === 0) return 0;
+    return this.filteredOffers.filter((offer) => offer.status === true).length;
+  }
+  
+  quantiteTotalDisponible(): number {
+    if (this.filteredOffers.length === 0) return 0;
+    // Filtrer les offres avec le statut "Disponible" et sommer leurs quantités
+    return this.filteredOffers
+      .filter((offer) => offer.status === true) // Garder seulement les offres disponibles
+      .reduce((total, offer) => total + (offer.quantite || 0), 0); // Somme des quantités
+  }
+  
+  acheterEnergie(offre: Offre): void {
+    const dialogRef = this.dialog.open(AcheterEnergieComponent, {
+      data: offre, // Passez l'offre sélectionnée au composant de dialogue
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'acheter') {
+        // Logique à exécuter après l'achat (par exemple, mettre à jour l'offre)
+        console.log('Achat confirmé pour l\'offre :', offre);
+        // Vous pouvez mettre à jour l'offre dans la liste ici, par exemple:
+        //offre.status = false; // Marquer l'offre comme vendue
+      } else {
+        console.log('Achat annulé.');
+      }
+    });
+  }
 }
