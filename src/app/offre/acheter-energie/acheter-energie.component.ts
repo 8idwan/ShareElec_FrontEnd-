@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Offre } from '../model/offre.model';
@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { loadStripe } from '@stripe/stripe-js';
 import { PaymentService } from '../paymentservice/payment.service';
 import { Router } from '@angular/router';  // Importer le Router
+import { TransactionRequest } from '../paymentservice/transactionRequest.model';
+import { UserResponseModel } from '../../user/model/user-response.model';
 
 @Component({
   selector: 'app-acheter-energie',
@@ -17,8 +19,8 @@ import { Router } from '@angular/router';  // Importer le Router
   templateUrl: './acheter-energie.component.html',
   styleUrl: './acheter-energie.component.css'
 })
-export class AcheterEnergieComponent {
-
+export class AcheterEnergieComponent implements OnInit {
+  currentUser!: UserResponseModel | null;  
   acheterForm: FormGroup;
   isProcessingPayment = false;
   stripePromise = loadStripe('pk_test_51R4SW0PENFnTPu7Q1eAwM82kwqF4K7o8eYiAgOkx2KaIxtVfxHWgEHvxiA0U75JDhDpWigeDqLvnM6iCaubaFxPS00GrxxJZHl');
@@ -39,6 +41,13 @@ export class AcheterEnergieComponent {
     }
   }
 
+  ngOnInit() {
+    const storedUserJson = localStorage.getItem('currentUser');
+    if (storedUserJson) {
+      this.currentUser = JSON.parse(storedUserJson) as UserResponseModel;
+    }
+  }
+
   onAnnulerClick(): void {
     this.dialogRef.close();
   }
@@ -56,8 +65,10 @@ export class AcheterEnergieComponent {
       // Calcul du montant à payer
       const quantite = this.offre.vendDetails ? this.acheterForm.value.quantiteVoulue : this.offre.quantite;
       const montant = quantite * this.offre.prixKw;
-      
-      this.paymentService.createPaymentIntent(montant).subscribe(
+
+const transaction = new TransactionRequest(this.offre.id, montant, quantite, this.currentUser!.id, this.offre.user.idUtilisateure);
+      console.log(transaction)
+      this.paymentService.createPaymentIntent(transaction).subscribe(
         async (response) => {
           console.log(response); // Vérifie ce que retourne l'API
       
@@ -97,3 +108,5 @@ export class AcheterEnergieComponent {
     });
   }
 }
+
+
