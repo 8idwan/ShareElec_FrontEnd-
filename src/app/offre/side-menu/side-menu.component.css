@@ -4,8 +4,8 @@
   width: 220px;
   position: fixed;
   left: 0;
-  top: 60px;
-  bottom: 60px;
+  top: 70px;
+  bottom: 150px;
   padding: 20px;
   overflow-y: auto;
 }
