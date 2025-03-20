@@ -13,11 +13,15 @@
             <!-- User Information -->
             <div class="flex flex-col">
                 <div class="flex items-center gap-3">
-                    <h2 class="text-2xl font-semibold">Marie Durant</h2>
+                    <h2 class="text-2xl font-semibold">
+                        {{ currentUser?.prenom }} {{ currentUser?.nom }}
+                    </h2>
                     <button class="bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center">
                         ✏️ Modifier
                     </button>
-                    <button class="bg-red-500 text-white px-3 py-1 rounded-lg flex items-center">
+                    <button 
+                        class="bg-red-500 text-white px-3 py-1 rounded-lg flex items-center"
+                        (click)="deleteAccount()">
                         Delete
                     </button>
                 </div>

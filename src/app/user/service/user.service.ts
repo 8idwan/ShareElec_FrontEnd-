@@ -56,4 +56,15 @@ export class UserService {
   verifyEmail(email: string, code: string): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(`${this.baseUrl}/veriferEmail`, { email, code });
   }
+  deleteUser(id: number): Observable<any> {
+    const endpoint = `${this.baseUrl}/del/${id}`;
+    console.log("Calling DELETE endpoint:", endpoint);
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({ 
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.delete(endpoint, { headers });
+  }
+  
+  
 }

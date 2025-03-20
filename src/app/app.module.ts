@@ -24,7 +24,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     MatButtonModule,
     RouterModule.forRoot(routes),
     UserModule,
-    AppComponent  // Import AppComponent here instead of declarations if it's standalone
+    AppComponent  
   ],
   providers: [{
       provide: HTTP_INTERCEPTORS,
