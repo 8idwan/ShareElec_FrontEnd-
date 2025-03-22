@@ -1,22 +1,21 @@
+/* app.component.css */
 .main-content {
   display: flex;
-  justify-content: center;
-  /* Centrage horizontal */
+  justify-content: center; /* Horizontal centering */
 }
 
 .content {
-  width: 100%;
-  /* Prend toute la largeur */
-  max-width: 1200px;
-  /* Largeur maximale optionnelle */
+  width: 100%; /* Full width */
+  max-width: 1200px; /* Optional maximum width */
 }
 
+/* If you are using app-side-menu as a wrapper for the sidebar,
+   ensure it reserves the needed width for the side menu */
 app-side-menu {
- /*z-index: -1;*/
   flex: 0 0 220px;
 }
 
-/* Style centré quand non authentifié */
+/* Center content when no side menu is present */
 .main-content:has(app-side-menu:not(*)) .content {
   display: flex;
   justify-content: center;

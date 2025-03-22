@@ -1,3 +1,4 @@
+// login.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../service/user.service';
@@ -23,25 +24,25 @@ export class LoginComponent {
 
   login() {
     console.log('Attempting login with:', { email: this.email }); 
-
+  
     const credentials: LoginRequestModel = { 
       email: this.email, 
       password: this.password
     };
-
+  
     this.userService.login(credentials).subscribe({
       next: (response) => {
         console.log('Login response:', response);
         if (response && response.token) {
           // 1) STORE TOKEN IN LOCAL STORAGE
           localStorage.setItem('token', response.token);
-
+  
           // 2) STORE THE USER DATA AS A STRING
           //    response.utilisateur is the UserResponseModel
           localStorage.setItem('currentUser', JSON.stringify(response.utilisateur));
-
+  
           // 3) REDIRECT AFTER LOGIN
-          this.router.navigate(['/user/profile']);
+          this.router.navigate(['/']);
         } else {
           this.errorMessage = 'Réponse invalide du serveur';
         }
@@ -56,5 +57,5 @@ export class LoginComponent {
       }
     });
   }
-
+  
 }

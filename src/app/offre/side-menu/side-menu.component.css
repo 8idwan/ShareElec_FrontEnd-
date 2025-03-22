@@ -1,13 +1,15 @@
+/* side-menu.css */
 .sidebar {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-
-  color: white;
   width: 220px;
-  height: 800px;
   position: fixed;
+  left: 0;
+  /* Adjust these values to match your header and footer heights */
+  top: 60px;
+  bottom: 60px;
   padding: 20px;
-  
+  overflow-y: auto; /* Allows scrolling if content exceeds available space */
 }
 
 .sidebar nav a {
@@ -29,7 +31,6 @@
 .sidebar nav a svg {
   margin-right: 10px;
 }
-
 
 .sidebar nav a:hover {
   background-color: #007bff;

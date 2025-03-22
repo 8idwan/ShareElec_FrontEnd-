@@ -52,7 +52,13 @@ export class VerifyEmailComponent {
       next: (response) => {
         console.log('Réponse du serveur:', response);
         this.successMessage = response.message;
-        this.router.navigate(['/user/login']); 
+        this.router.navigate(['/login']).then(success => {
+          if (!success) {
+            console.error('Navigation to /user/login failed');
+          }
+        }).catch(err => {
+          console.error('Navigation error:', err);
+        });
       },
       error: (error) => {
         console.error('Erreur de vérification:', error);
